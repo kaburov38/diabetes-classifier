@@ -1,0 +1,103 @@
+{% extends 'classifier/base.html' %}
+
+{% block main_block %}
+
+<form action="/service/predict" method="post">
+    {% csrf_token %}
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age"><br><br>
+
+    <label for="sex">Sex:</label>
+    <select name="sex" id="sex">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select><br><br>
+
+    <label for="polyuria">Polyuria:</label>
+    <select name="polyuria" id="polyuria">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="polydipsia">Polydipsia:</label>
+    <select name="polydipsia" id="polydipsia">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="sudden_weight_loss">Sudden Weight Loss:</label>
+    <select name="sudden_weight_loss" id="sudden_weight_loss">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="weakness">Weakness:</label>
+    <select name="weakness" id="weakness">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="polyphagia">Polyphagia:</label>
+    <select name="polyphagia" id="polyphagia">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="genital_thrush">Genital Thrush:</label>
+    <select name="genital_thrush" id="genital_thrush">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="visual_blurring">Visual Blurring:</label>
+    <select name="visual_blurring" id="visual_blurring">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="itching">Itching:</label>
+    <select name="itching" id="itching">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="irritability">Irritability:</label>
+    <select name="irritability" id="irritability">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="delayed_healing">Delayed Healing:</label>
+    <select name="delayed_healing" id="delayed_healing">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="partial_paresis">Partial Paresis:</label>
+    <select name="partial_paresis" id="partial_paresis">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="muscle_stiffness">Muscle Stiffness:</label>
+    <select name="muscle_stiffness" id="muscle_stiffness">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="alopecia">Alopecia:</label>
+    <select name="alopecia" id="alopecia">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <label for="obesity">Obesity:</label>
+    <select name="obesity" id="obesity">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

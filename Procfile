@@ -1,0 +1,1 @@
+web: gunicorn diabetes_classifier.wsgi --log-file -
