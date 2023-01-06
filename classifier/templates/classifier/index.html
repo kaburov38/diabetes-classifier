@@ -2,10 +2,11 @@
 
 {% block main_block %}
 <h4 style="text-align:center;">Diabetes Classifier</h4>
-<form class="container" action="/service/predict" method="post">
+<br>
+<form class="container" id="diabetes-form" action="/service/predict" method="get">
   {% csrf_token %}
   <div class="row">
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label for="age">Age:</label>
       <input type="number" id="age" name="age">
     </div>
@@ -55,7 +56,7 @@
         <option value="No">No</option>
       </select>
     </div>
-  
+    
     <div class="form-group col-md-6">
       <label for="polyphagia">Polyphagia:</label>
       <select class="form-select" name="polyphagia" id="polyphagia">
@@ -67,13 +68,23 @@
 
   <div class="row">
     <div class="form-group col-md-6">
+      <label for="genital_thrush">Genital Thrush:</label>
+      <select class="form-select" name="genital_thrush" id="genital_thrush">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
       <label for="visual_blurring">Visual Blurring:</label>
       <select class="form-select" name="visual_blurring" id="visual_blurring">
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
     </div>
-  
+  </div>
+
+  <div class="row">
     <div class="form-group col-md-6">
       <label for="itching">Itching:</label>
       <select class="form-select" name="itching" id="itching">
@@ -81,17 +92,17 @@
         <option value="No">No</option>
       </select>
     </div>
-  </div>
 
-  <div class="row">
     <div class="form-group col-md-6">
       <label for="irritability">Irritability:</label>
       <select class="form-select" name="irritability" id="irritability">
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
-    </div>
-    
+    </div>  
+  </div>
+
+  <div class="row">
     <div class="form-group col-md-6">
       <label for="delayed_healing">Delayed Healing:</label>
       <select class="form-select" name="delayed_healing" id="delayed_healing">
@@ -99,9 +110,7 @@
         <option value="No">No</option>
       </select>
     </div>
-  </div>
 
-  <div class="row">
     <div class="form-group col-md-6">
       <label for="partial_paresis">Partial Paresis:</label>
       <select class="form-select" name="partial_paresis" id="partial_paresis">
@@ -109,7 +118,9 @@
         <option value="No">No</option>
       </select>
     </div>
-  
+  </div>
+
+  <div class="row">    
     <div class="form-group col-md-6">
       <label for="muscle_stiffness">Muscle Stiffness:</label>
       <select class="form-select" name="muscle_stiffness" id="muscle_stiffness">
@@ -117,9 +128,7 @@
         <option value="No">No</option>
       </select>
     </div>
-  </div>
 
-  <div class="row">
     <div class="form-group col-md-6">
       <label for="alopecia">Alopecia:</label>
       <select class="form-select" name="alopecia" id="alopecia">
@@ -127,7 +136,9 @@
         <option value="No">No</option>
       </select>
     </div>
-  
+  </div>
+
+  <div class="row">
     <div class="form-group col-md-6">
       <label for="obesity">Obesity:</label>
       <select class="form-select" name="obesity" id="obesity">
@@ -136,8 +147,53 @@
       </select>
     </div>
   </div>
-
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="prediction-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Prediction Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Your Result: 
+        <span id="prediction-result">
+          -
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+    $("#diabetes-form").submit(function(e) {
+    
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+        var actionUrl = form.attr('action');
+
+        $.ajax({
+            type: "GET",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+              $("#prediction-result").html(data['result'])
+              $('#prediction-modal').modal('show');
+            }
+        });
+    });
+</script>
 
 {% endblock %}
