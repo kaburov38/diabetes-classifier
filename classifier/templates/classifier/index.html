@@ -173,8 +173,6 @@
   </div>
 </div>
 
-</div>
-
 <script>
     $("#diabetes-form").submit(function(e) {
     
@@ -189,8 +187,8 @@
             data: form.serialize(), // serializes the form's elements.
             success: function(data)
             {
-              $("#prediction-result").html(data['result'])
-              $('#prediction-modal').modal('show');
+              $("#prediction-result").html(data['result']);
+              $("#prediction-modal").modal('show');
             }
         });
     });
